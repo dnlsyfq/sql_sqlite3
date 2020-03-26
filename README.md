@@ -54,10 +54,11 @@ EXPLAIN QUERY PLAN SELECT * FROM <table>;
 
  ```
 CREATE INDEX index_name ON table_name(column_name);
+CREATE INDEX index_name ON table_name(column_name_1, column_name_2);
  ```
 
  ```
- CREATE INDEX IF NOT EXISTS area_idx ON facts(area);
+CREATE INDEX IF NOT EXISTS area_idx ON facts(area);
 
 SELECT * FROM facts WHERE area = 10000;
 SELECT * FROM facts WHERE area > 10000;
@@ -65,3 +66,6 @@ SELECT * FROM facts WHERE area < 10000;
  ```
 
  > create indexes for speeding up queries that filter on multiple columns.
+
+**Covering Index**
+ When an index contains all of the information necessary to answer a query, it's called a covering index. Since the index covers for the actual table and can return the requested results to the query, SQLite doesn't need to query the actual table. For many queries, especially as your data gets larger, this can be much more efficient.
